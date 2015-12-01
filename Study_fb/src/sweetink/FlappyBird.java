@@ -14,25 +14,25 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 	public static final int gameReady = 1;
 	public static final int gameIng  =2;
 	public static final int gameOver = 3;
-	BackGround bg; //±³¾°Àà
+	BackGround bg; //èƒŒæ™¯ç±»
 	int gameState;
 	int max_score;
 	int temp_score;
 	Num n;
 	long TIME = 100;
-	int timer = 0;//Ğ¡Äñ±ä»»
+	int timer = 0;//å°é¸Ÿå˜æ¢
 	Gameover go;
 	GameMain gm;
-	int bg_timer=0;//±³¾°±ä»»
-	Command pause; //ÔİÍ£°´Å¥
+	int bg_timer=0;//èƒŒæ™¯å˜æ¢
+	Command pause; //æš‚åœæŒ‰é’®
 	boolean flag  =false;
-	Pillar pi1,pi2,pi3;//ĞÂ°æ
-	Ground ground; //µØÃæ
-	Bird bird; //Äñ
+	Pillar pi1,pi2,pi3;//æ–°ç‰ˆ
+	Ground ground; //åœ°é¢
+	Bird bird; //é¸Ÿ
 	boolean gameover =false;
-	int score = 0; //·ÖÊı
+	int score = 0; //åˆ†æ•°
 	Image n_score = Image.createImage("/img/score/new.png");
-	LPAudioPlayer playerSwing,playerHit,playerGetPoint,playerPause; //ÒôÆµÀà
+	LPAudioPlayer playerSwing,playerHit,playerGetPoint,playerPause; //éŸ³é¢‘ç±»
 	public FlappyBird(boolean suppressKeyEvents) throws Exception {
 	
 		
@@ -46,7 +46,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		pause = new Command("pasue",Command.OK,1);
 		go = new Gameover(this);
 		bg = new BackGround(this);
-		ground = new Ground(this); //ÊµÀı»¯
+		ground = new Ground(this); //å®ä¾‹åŒ–
 		pi1 =new Pillar(this.getWidth()+0,this);
 		pi2 = new Pillar(this.getWidth()+pi1.width*3,this);
 	//	pi3 = new Pillar(240+150+110, this);
@@ -60,9 +60,9 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		this.setCommandListener(this);
 		// TODO Auto-generated constructor stub
 		new Thread(this).start();
-		System.out.println("Ïß³Ì¿ªÊ¼...");
+		System.out.println("çº¿ç¨‹å¼€å§‹...");
 	}
-	//Ïß³Ì
+	//çº¿ç¨‹
 	public void run() {
 		// TODO Auto-generated method stub
 		
@@ -72,19 +72,19 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 			input();
 			logic();
 			
-			//ÓÎÏ·µÚÒ»ÆÁ
+			//æ¸¸æˆç¬¬ä¸€å±
 			if(gameState==gameMain){
-				System.out.println("ÓÎÏ·Ö÷½çÃæ...");
+				System.out.println("æ¸¸æˆä¸»ç•Œé¢...");
 				paintGameMain();
 			}
-			//ÓÎÏ·µÚ¶şÆÁ
+			//æ¸¸æˆç¬¬äºŒå±
 			else if(gameState==gameReady){
-				System.out.println("ÓÎÏ·×¼±¸...");
+				System.out.println("æ¸¸æˆå‡†å¤‡...");
 				paintGameReady();
 			}
-			//ÓÎÏ·ÄÚÈİ»æÖÆ
+			//æ¸¸æˆå†…å®¹ç»˜åˆ¶
 			else if(gameState==gameIng){
-				System.out.println("ÓÎÏ·ÖĞ...");
+				System.out.println("æ¸¸æˆä¸­...");
 //					if(!gameover){
 //					bg_timer++;
 //					if(bg_timer%45==0){
@@ -97,7 +97,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 			 }
 			else if(gameState == gameOver){
 				
-				System.out.println("ÓÎÏ·½áÊø");
+				System.out.println("æ¸¸æˆç»“æŸ");
 				paintGameOver();
 				
 			}
@@ -112,10 +112,10 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}}
+			}} 
 		}
 	}
-	//ÓÎÏ·³õÊ¼»¯»æÍ¼ 1
+	//æ¸¸æˆåˆå§‹åŒ–ç»˜å›¾ 1
 	public void paintGameMain(){
 		Graphics g = this.getGraphics();
 		
@@ -129,7 +129,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		}
 		flushGraphics();
 	}
-	//ÓÎÏ·³õÊ¼»¯»æÍ¼ 2
+	//æ¸¸æˆåˆå§‹åŒ–ç»˜å›¾ 2
 	public void paintGameReady(){
 		Graphics g = this.getGraphics();
 		
@@ -139,7 +139,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		n.drawNumber(g, n.img_b, score, this.getWidth()/2, 2);
 		flushGraphics();
 	}
-	//ÓÎÏ·ÖĞ»æÍ¼
+	//æ¸¸æˆä¸­ç»˜å›¾
 	public void paintGameIng(){
 		Graphics g = this.getGraphics();
 		bg.paint(g);
@@ -157,7 +157,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		}
 		flushGraphics();
 	}
-	//ÓÎÏ·½áÊø»æÍ¼
+	//æ¸¸æˆç»“æŸç»˜å›¾
 	public void paintGameOver(){
 		Graphics g = this.getGraphics();
 		
@@ -179,7 +179,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		flushGraphics();
 	}
 	
-	//ÓÎÏ·ÖØĞÂ³õÊ¼
+	//æ¸¸æˆé‡æ–°åˆå§‹
 	public void init() throws Exception{
 		timer=0;
 		TIME = 100;
@@ -189,7 +189,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 		bird = new Bird(pi1.width,this);
 		score = 0;
 	}
-	//ÓÎÏ·ÊäÈëÊÂ¼ş
+	//æ¸¸æˆè¾“å…¥äº‹ä»¶
 	public void input()
 	{
 		int k = getKeyStates();
@@ -288,7 +288,7 @@ public class FlappyBird extends GameCanvas implements Runnable ,CommandListener 
 			
 		}
 	}
-	//ÓÎÏ·Âß¼­´¦Àí
+	//æ¸¸æˆé€»è¾‘å¤„ç†
 public void logic(){
 	switch(gameState){
 	case gameMain:

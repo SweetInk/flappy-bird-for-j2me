@@ -101,6 +101,6 @@ public class LPAudioPlayer {
 		if(player!=null){
 			player.close();
 			player = null;
-		}
+		} 
 	}
 }
